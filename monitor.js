@@ -97,7 +97,7 @@ app.post('/api/images', parser.single("image"), (req, res) => {
     });
 
 app.get('/', (req, res) => {
-    res.send("I am up and running");
+    res.send(`I am up and running on port ${port}`);
 });
 
 app.get('/api/images/:datetime', (req, res) => {
