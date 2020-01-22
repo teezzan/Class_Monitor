@@ -96,9 +96,9 @@ app.post('/api/images', parser.single("image"), (req, res) => {
 
     });
 
-// app.get('/api/images', (req, res) => {
-//     res.send(img_time);
-// });
+app.get('/', (req, res) => {
+    res.send("I am up and running");
+});
 
 app.get('/api/images/:datetime', (req, res) => {
     const img = img_time.find(c => c.datetime === parseInt(req.params.datetime));
