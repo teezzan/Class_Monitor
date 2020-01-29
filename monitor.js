@@ -1,8 +1,13 @@
 const multer = require("multer");
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
-const express = require('express')
+const express = require('express');
 const app = express();
+const cors = require('cors');
+
+app.use(express.static('public'));
+
+app.use(cors());
 
 const img_time = [];
 // const connection = require('./cre_db');
@@ -119,4 +124,4 @@ app.get("/api/images", function (req, res) {
     });
 
 const port = process.env.PORT || 3000;
-app.listen(port, ()=> console.log(`Listening on port ${port}`))
+app.listen(port, ()=> console.log(`Listening on port ${port}`));
