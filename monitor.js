@@ -3,6 +3,9 @@ const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 const express = require('express')
 const app = express();
+const cors = require('cors');
+
+app.use(cors());
 
 const img_time = [];
 // const connection = require('./cre_db');
