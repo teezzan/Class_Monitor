@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login page</title>
+    <link rel="stylesheet" href="Awesome.css">
+    <script type="text/javascript"></script>
+</head>
+<body id="login">
+    <ul>
+        <li>
+            <a href="#">LOGIN</a>
+        </li>
+        <li>
+            <a href="#">PROJECTS</a>
+        </li>
+        <li>
+            <a href="#">ABOUT</a>
+        </li>
+        <li>
+            <a href="#">SERVICES</a>
+        </li>
+        <li>
+            <a href="#" style="color:  rgb(241, 219, 12)">HOME</a>
+        </li>
+
+    </ul>
+    <div id="fakeimg">
+        <a>OAU CLASSPEEP</a>
+    </div>
+    <div id="cover">
+        <h3>Login</h3>
+        <form>
+            <input type="text" name="username" placeholder="username" class="username"><br>
+            <input type="password" name="password" placeholder="password" class="password"><br>
+            <button type="button" class="loginBtn" onclick="loginFn();">submit</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        function loginFn(){
+            var username = document.querySelector('.username').value;
+            var passwords = document.querySelector('.password').value;
+
+            // window.alert(username);
+
+            if(username == "admin" && passwords == "samuel"){
+                window.location.assign("services.html");
+                // window.alert("incorrect username or password");
+            }else{
+                window.alert("incorrect username or password");
+                // window.location.assign("services.html");
+            }
+        }
+    </script>
+</body>
+</html>

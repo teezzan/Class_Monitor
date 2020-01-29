@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Service page</title>
+    <link rel="stylesheet" href="Awesome.css">
+
+
+    <script>
+        fetch("http://classmonitor.herokuapp.com/api/images", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    "Accept": "application/json"
+                },
+            })
+            .then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                for (i = 0; i < data.length; i++) {
+                    data[i].date = new Date(data[i].datetime);
+                }
+                console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+                outputData(data);
+            });
+    </script>
+
+
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="index.html">LOGOUT</a>
+        </li>
+        <li>
+            <a href="#">PROJECTS</a>
+        </li>
+        <li>
+            <a href="#">ABOUT</a>
+        </li>
+        <li>
+            <a href="#">SERVICES</a>
+        </li>
+        <li>
+            <a href="" style="color:  rgb(241, 219, 12)">HOME</a>
+        </li>
+
+    </ul>
+    <div id="fakeimg">
+        <a>OAU CLASSPEEP</a>
+    </div>
+    <div id="classInfo">
+        <h3>Information of class availability</h3>
+        <h3>Time: </h3>
+        <p id="time">10/02/1878 5:45 PM</p>
+        <h3>Light: </h3>
+        <p id="light">No</p>
+        <h3>Class visual:</h3><br>
+        <div>
+            <img src="page.jpg" id="image">
+            <!-- <img src="page.jpg" id="image2" style="width: 100px;">
+            <img src="page.jpg" id="image3" style="width: 100px;"> -->
+        </div>
+    </div>
+
+
+    <script>
+        function outputData(data) {
+            var image = document.getElementById('image');
+            // var image2 = document.getElementById('image2');
+            // var image3 = document.getElementById('image3');
+            var time = document.getElementById('time');
+            var light = document.getElementById('light');
+
+            last = data.length - 1;
+            // console.log(data[last]);
+            // console.log(data[last].url);
+
+            if (data[last].power == "1") {
+                light.innerHTML = "YES";
+            } else {
+                light.innerHTML = "NO";
+            }
+            time.innerHTML = data[last].date;
+            image.src = data[last].url;
+
+
+            // image2.src = data[last - 19].url;
+            // image3.src = data[last - 10].url;
+
+        }
+    </script>
+</body>
+
+</html>
