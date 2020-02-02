@@ -16,12 +16,16 @@ const img_time = [];
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/mydb', { useNewUrlParser: true }, (error) =>{
-// mongoose.connect('mongodb+srv://admin:admin@classmonitor-eoevj.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, (error) =>{
-    if(error){
-        console.log('error');
-    }
-    else{
+// mongoose.connect('mongodb://localhost:27017/mydb', {
+// useNewUrlParser: true,
+// }, (error) => {
+mongoose.connect('mongodb+srv://admin:admin@classmonitor-eoevj.mongodb.net/test?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}, (error) => {
+    if (error) {
+        console.log(error);
+    } else {
         console.log('created successfully');
     }
 });
@@ -37,30 +41,29 @@ mongoose.connect('mongodb://localhost:27017/mydb', { useNewUrlParser: true }, (e
 // });
 
 var dataSchema = new mongoose.Schema({
-    url :{
-        type :String,
+    url: {
+        type: String,
         required: "Required"
     },
-    id :{
-        type :String,
+    id: {
+        type: String,
         required: "Required"
     },
-    noise :{
-        type :String,
+    noise: {
+        type: String,
         required: "Required"
     },
-    datetime :{
-        type :Number,
+    datetime: {
+        type: Number,
         required: "Required"
     },
-    power :{
-        type :String,
+    power: {
+        type: String,
         required: "Required"
-    },    
+    },
 });
 
 var Data = mongoose.model("ClassFeed", dataSchema);
-
 
 
 
@@ -70,14 +73,20 @@ cloudinary.config({
     cloud_name: process.env.CLOUD_NAME || 'skryptor',
     api_key: process.env.API_KEY || "144111297658495",
     api_secret: process.env.API_SECRET || '0IQEPeHDcD36_PdeKOx4zn97IC0'
-    });
-    const storage = cloudinaryStorage({
+});
+const storage = cloudinaryStorage({
     cloudinary: cloudinary,
     folder: "demo",
     allowedFormats: ["jpg", "png"],
-    transformation: [{ width: 500, height: 500, crop: "limit" }]
-    });
-    const parser = multer({ storage: storage });
+    transformation: [{
+        width: 500,
+        height: 500,
+        crop: "limit"
+    }]
+});
+const parser = multer({
+    storage: storage
+});
 
 app.post('/api/images', parser.single("image"), (req, res) => {
     // console.log(req.file) // to see what is returned to you
@@ -95,11 +104,11 @@ app.post('/api/images', parser.single("image"), (req, res) => {
             return res.send(image);
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
             return res.status(400).send("Unable to save to database");
         });
 
-    });
+});
 
 app.get('/', (req, res) => {
     res.send(`I am up and running on port ${port}`);
@@ -107,21 +116,21 @@ app.get('/', (req, res) => {
 
 app.get('/api/images/:datetime', (req, res) => {
     const img = img_time.find(c => c.datetime === parseInt(req.params.datetime));
-    if(!img) return res.status(404).send('The img with the datetime is not found');
+    if (!img) return res.status(404).send('The img with the datetime is not found');
     res.send(`You have uploaded this image: <hr/><img src="${img.url}" width="500"> The noise was ${img.noise} and the status of power was ${img.power} <hr />`);
 
 });
 
-app.get("/api/images", function (req, res) {   
+app.get("/api/images", function (req, res) {
     Data.find({}, function (err, allDetails) {
         if (err) {
-            console.log(err)
+            console.log(err);
             return res.status(400).send("Unable to retrieve");
         } else {
             return res.send(allDetails);
         }
     });
-    });
+});
 
 const port = process.env.PORT || 3000;
-app.listen(port, ()=> console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}`));
