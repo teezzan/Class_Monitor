@@ -16,13 +16,15 @@ const img_time = [];
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/mydb', {
+// mongoose.connect('mongodb://localhost:27017/mydb', {
+// useNewUrlParser: true,
+// }, (error) => {
+mongoose.connect('mongodb+srv://admin:admin@classmonitor-eoevj.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, (error) => {
-    // mongoose.connect('mongodb+srv://admin:admin@classmonitor-eoevj.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, (error) =>{
     if (error) {
-        console.log('error');
+        console.log(error);
     } else {
         console.log('created successfully');
     }
@@ -67,7 +69,6 @@ var Data = mongoose.model("ClassFeed", dataSchema);
 
 
 
-
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME || 'skryptor',
     api_key: process.env.API_KEY || "144111297658495",
@@ -103,7 +104,7 @@ app.post('/api/images', parser.single("image"), (req, res) => {
             return res.send(image);
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
             return res.status(400).send("Unable to save to database");
         });
 
@@ -123,7 +124,7 @@ app.get('/api/images/:datetime', (req, res) => {
 app.get("/api/images", function (req, res) {
     Data.find({}, function (err, allDetails) {
         if (err) {
-            console.log(err)
+            console.log(err);
             return res.status(400).send("Unable to retrieve");
         } else {
             return res.send(allDetails);
