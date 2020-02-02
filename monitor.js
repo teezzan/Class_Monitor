@@ -16,8 +16,8 @@ const img_time = [];
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-// mongoose.connect('mongodb://localhost:27017/mydb', { useNewUrlParser: true }, (error) =>{
-mongoose.connect('mongodb+srv://admin:admin@classmonitor-eoevj.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, (error) =>{
+mongoose.connect('mongodb://localhost:27017/mydb', { useNewUrlParser: true }, (error) =>{
+// mongoose.connect('mongodb+srv://admin:admin@classmonitor-eoevj.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, (error) =>{
     if(error){
         console.log('error');
     }
@@ -80,7 +80,7 @@ cloudinary.config({
     const parser = multer({ storage: storage });
 
 app.post('/api/images', parser.single("image"), (req, res) => {
-    console.log(req.file) // to see what is returned to you
+    // console.log(req.file) // to see what is returned to you
     // const image = {};
     var image = new Data();
     image.url = req.file.url;
