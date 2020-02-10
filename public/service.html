@@ -1,0 +1,176 @@
+<html lang="en">
+<head>
+  <title>Service Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="Awesome.css"> -->
+  <link rel="stylesheet" href="css\bootstrap-3.3.7-dist\css\bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <script src="js\jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="css\bootstrap-3.3.7-dist\js\bootstrap.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ -->
+  <script>
+    fetch("https://classmonitor.herokuapp.com/api/images", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "Accept": "application/json"
+        },
+    })
+    .then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        for (i = 0; i < data.length; i++) {
+            data[i].date = new Date(data[i].datetime);
+        }
+        console.log(data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+        outputData(data);
+    });
+  </script>
+
+
+</head>
+<body>
+  <nav class="navbar navbar-inverse" id="navbar" style="height: 80px;">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="margin-top: 0px";><h3>OAU CLASSPEEP</h3></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <!-- <ul class="nav navbar-nav">
+            <li class="active"><a href="index.php">Home</a></li>
+            <li class="active"><a href="blog.php">Blog</a></li>
+          </ul> -->
+          <ul class="nav navbar-nav navbar-right">
+            <li style="padding-top: 10px;"><a href= '#'><span class='glyphicon glyphicon-dashboard'></span> Dashboard </a></li>
+            <!-- <li><a href='#'><span class='glyphicon glyphicon-user'></span> Login</a></li> -->
+            <li style="padding-top: 10px;"><a href='index.html' ><span class='glyphicon glyphicon-log-in'></span> Log out</a></li>
+          </ul>  
+        </div>
+      </div>
+    </nav>
+
+  <div class="container">
+    <h2>Class monitor</h2>  
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+           <div class="desc">Class A</div>
+          <img src="img1.jpg" id="image" alt="Los Angeles" style="width:100%; height:600px;">
+          <div class="carousel-caption">
+            <h3>Time: </h3>
+            <p id="time">06/02/2020 09:50 AM</p>
+            <h3>Light: </h3>
+            <p id="light">No</p>
+          </div>
+        </div>
+
+        <div class="item">
+         <div class="desc">Class B</div>
+          <img src="img2.jpg" id="image2" alt="Chicago" style="width:100%; height:600px;" >
+          <div class="carousel-caption">
+            <h3>Time: </h3>
+            <p id="time1">06/02/2020 09:45 AM</p>
+            <h3>Light: </h3>
+            <p id="light1">No</p>
+          </div>
+        </div>
+      
+        <div class="item">
+               <div class="desc">Class C</div>
+          <img src="img3.jpg" id="image3" alt="New york" style="width:100%; height:600px;">
+          <div class="carousel-caption">
+            <h3>Time: </h3>
+            <p id="time2">06/02/2020 09:55 AM</p>
+            <h3>Light: </h3>
+            <p id="light2">No</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <script>
+      function outputData(data) {
+          var image = document.getElementById('image');
+          var image2 = document.getElementById('image2');
+          var image3 = document.getElementById('image3');
+          var time = document.getElementById('time');
+          var time1 = document.getElementById('time1');
+          var time2 = document.getElementById('time2');
+          var light = document.getElementById('light');
+          var light1 = document.getElementById('light1');
+          var light2 = document.getElementById('light2');
+
+          last = data.length - 1;
+          last1 = data.length - 2;
+          last2 = data.length - 3;
+          // console.log(data[last]);
+          // console.log(data[last].url);
+
+          if (data[last].power == "1") {
+              light.innerHTML = "YES";
+          } else {
+              light.innerHTML = "NO";
+          }
+
+          if (data[last1].power == "1") {
+              light1.innerHTML = "YES";
+          } else {
+              light1.innerHTML = "NO";
+          }
+
+          if (data[last2].power == "1") {
+              light2.innerHTML = "YES";
+          } else {
+              light2.innerHTML = "NO";
+          }
+
+          time.innerHTML = data[last].date;
+          time1.innerHTML = data[last1].date;
+          time2.innerHTML = data[last2].date;
+
+          image.src = data[last].url;
+          image2.src = data[last1].url;
+          image3.src = data[last2].url;
+
+      }
+  </script>
+  <div class="container-fluid bg-primary navbar-fixed-bottom">
+    <br/>
+    <p>
+        Class-Monitor &copy; 2020 by Bankole Samuel and Lawal Ibrahim.
+    </p>
+  </div>
+</body>
+</html>
+
