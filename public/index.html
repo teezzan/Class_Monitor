@@ -1,58 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login page</title>
+    <link rel="stylesheet" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script src="js/jquery2.js"></script>
+    <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="Awesome.css">
-    <script type="text/javascript"></script>
 </head>
-<body id="login">
-    <ul>
-        <li>
-            <a href="#">LOGIN</a>
-        </li>
-        <li>
-            <a href="#">PROJECTS</a>
-        </li>
-        <li>
-            <a href="#">ABOUT</a>
-        </li>
-        <li>
-            <a href="#">SERVICES</a>
-        </li>
-        <li>
-            <a href="#" style="color:  rgb(241, 219, 12)">HOME</a>
-        </li>
 
-    </ul>
-    <div id="fakeimg">
+<body id="login">
+
+    <nav class="navbar navbar-inverse" style="height: 80px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="margin-top: 0px;">
+                    <h3>OAU CLASSPEEP</h3>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <!-- <ul class="nav navbar-nav">
+            <li class="active"><a href="index.php">Home</a></li>
+            <li class="active"><a href="blog.php">Blog</a></li>
+          </ul> -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li style="padding-top: 10px;"><a href='#'><span class='glyphicon glyphicon-dashboard'></span>
+                            Dashboard </a></li>
+                    <li style="padding-top: 10px;"><a href='#'><span class='glyphicon glyphicon-user'></span> Login</a>
+                    </li>
+                    <li style="padding-top: 10px;"><a href='index.html'><span class='glyphicon glyphicon-log-in'></span>
+                            Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- <div id="fakeimg">
         <a>OAU CLASSPEEP</a>
-    </div>
-    <div id="cover">
+    </div> -->
+    <div id="form">
         <h3>Login</h3>
         <form>
             <input type="text" name="username" placeholder="username" class="username"><br>
             <input type="password" name="password" placeholder="password" class="password"><br>
+            <select>
+                <option>--Select Venue--</option>
+                <option>PY 102</option>
+                <option>PY 130</option>
+                <option>CH 102</option>
+                <option>ODLT I</option>
+                <option>ODLT II</option>
+                <option>AUD I</option>
+                <option>AUD II</option>
+                <option>1000 SLT</option>
+                <option>CHEM ENG LT</option>
+                <option>AJOSE</option>
+                <option>ICAN LT</option>
+            </select>
             <button type="button" class="loginBtn" onclick="loginFn();">submit</button>
         </form>
     </div>
     <script type="text/javascript">
-        function loginFn(){
+        function loginFn() {
             var username = document.querySelector('.username').value;
             var passwords = document.querySelector('.password').value;
 
             // window.alert(username);
 
-            if(username == "admin" && passwords == "samuel"){
-                window.location.assign("services.html");
+            if (username == "admin" && passwords == "samuel") {
+                window.location.assign("service.html");
                 // window.alert("incorrect username or password");
-            }else{
+            } else {
                 window.alert("incorrect username or password");
                 // window.location.assign("services.html");
             }
         }
     </script>
+    <div class="container-fluid bg-primary navbar-fixed-bottom">
+        <br />
+        <p>
+            Class-Monitor &copy; 2020 by Bankole Samuel and Lawal Ibrahim.
+        </p>
+    </div>
 </body>
+
 </html>
